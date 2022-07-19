@@ -10,4 +10,15 @@ describe("Employee", () => {
       expect(obj.email).toEqual("example@example.com");
     });
   });
+
+  describe("Accessors", () => {
+    it("should access Employee attributes correctly", () => {
+      const obj = new Employee("John Doe", 1, "example@example.com");
+
+      expect(obj.getName()).toBe(obj.name);
+      expect(obj.getId()).toBe(obj.id);
+      expect(obj.getEmail()).toBe(obj.email);
+      expect(obj.getRole()).toEqual("Employee");
+    });
+  });
 })
