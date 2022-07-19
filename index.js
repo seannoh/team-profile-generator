@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const inquirer = require("inquirer");
 const fs = require("fs");
+const validator = require("email-validator");
 const template = require("./src/template");
 
 const Manager = require("./lib/Manager");
@@ -9,13 +10,68 @@ const Intern = require("./lib/Intern");
 
 
 // VARIABLES
-const employeeQuestions = [];
+const employeeQuestions = [
+  {
+    type: "input",
+    name: "name",
+    message: "Enter the employee's name:"
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "Enter the employee's ID:",
+    validate: function(input) {
+      if(isNaN(input) || input < 0){
+        return "Please enter a valid non-negative ID number"
+      } else {
+        return true;
+      }
+    }
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "Enter the employee's email address:",
+    validate: function(input) {
+      if(!validator.validate(input)){
+        return "Please enter a valid email address";
+      } else{
+        return true;
+      }
+    }
+  },
+];
 
-const managerQuestions = [];
+const managerQuestions = [
+  {
+    type: "input",
+    name: "officeNumber",
+    message: "Enter the manager's office number:",
+    validate: function(input) {
+      if(isNaN(input) || input < 0){
+        return "Please enter a valid non-negative office number"
+      } else {
+        return true;
+      }
+    }
+  }
+];
 
-const engineerQuestions = [];
+const engineerQuestions = [
+  {
+    type: "input",
+    name: "github",
+    message: "Enter the engineer's github username:"
+  }
+];
 
-const internQuestions = [];
+const internQuestions = [
+  {
+    type: "input",
+    name: "school",
+    message: "Enter the intern's school name:"
+  }
+];
 
 const employeesArr = [];
 
@@ -49,9 +105,13 @@ function addManager() {
   console.log("Please enter the manager's info:");
   inquirer.prompt(employeeQuestions.concat(managerQuestions))
   .then((response) => {
-    let manager = new Manager(response.name, response.id, response.email, response.officeNumber);
-    employeesArr.push(manager);
-    addEmployee();
+    try {
+      let manager = new Manager(response.name, +response.id, response.email, +response.officeNumber);
+      employeesArr.push(manager);
+      addEmployee();
+    } catch (error) {
+      console.error(error);
+    }
   });
 }
 
@@ -60,9 +120,13 @@ function addEngineer() {
   console.log("Please enter the engineer's info:");
   inquirer.prompt(employeeQuestions.concat(engineerQuestions))
   .then((response) => {
-    let engineer = new Engineer(response.name, response.id, response.email, response.github);
-    employeesArr.push(engineer);
-    addEmployee();
+    try {
+      let engineer = new Engineer(response.name, +response.id, response.email, response.github);
+      employeesArr.push(engineer);
+      addEmployee();
+    } catch (error) {
+      console.error(error);
+    }
   });
 }
 // asks intern questions 
@@ -70,15 +134,20 @@ function addIntern() {
   console.log("Please enter the intern's info:");
   inquirer.prompt(employeeQuestions.concat(internQuestions))
   .then((response) => {
-    let intern = new Intern(response.name, response.id, response.email, response.officeNumber);
-    employeesArr.push(intern);
-    addEmployee();
+    try {
+      let intern = new Intern(response.name, +response.id, response.email, response.school);
+      employeesArr.push(intern);
+      addEmployee();
+    } catch (error) {
+      console.error(error);
+    }
   });
 }
 
 // generates HTML string and writes to /dist/index.html
 function generateHTML() {
   //stub
+  console.log("Generate HTML!!!");
 }
 
 // starts the app by asking for manager info
