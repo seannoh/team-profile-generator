@@ -24,7 +24,24 @@ const employeesArr = [];
 
 // asks which kind of employee to add
 function addEmployee() {
-  // stub
+  inquirer.prompt({
+    type: "list",
+    name: "empType",
+    message: "Please select which kind of employee you would like to add:",
+    choices: ["Engineer", "Intern", "Finished Building Team"]
+  }).then((response) => {
+    switch(response.empType){
+      case "Engineer":
+        addEngineer();
+        break;
+      case "Intern":
+        addIntern();
+        break;
+      case "Finished Building Team":
+        generateHTML();
+        break;
+    }
+  })
 }
 
 // asks manager questions 
@@ -48,7 +65,7 @@ function generateHTML() {
 
 // starts the app by asking for manager info
 function init() {
-  // stub
+  addEmployee();
 }
 
 init();
