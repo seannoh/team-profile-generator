@@ -41,7 +41,7 @@ describe("Intern", () => {
 
     it("should throw an error if school is not a non-empty string", () => {
       const cb = () => new Intern("John Doe", 1, "example@example.com", 12345);
-      const err = new Error("Expected 'school' to be a non-negative number");
+      const err = new Error("Expected 'school' to be a non-empty string");
 
       expect(cb).toThrowError(err);
     });

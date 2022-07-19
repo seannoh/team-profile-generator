@@ -41,7 +41,7 @@ describe("Engineer", () => {
 
     it("should throw an error if github is not a non-empty string", () => {
       const cb = () => new Engineer("John Doe", 1, "example@example.com", 12345);
-      const err = new Error("Expected 'github' to be a non-negative number");
+      const err = new Error("Expected 'github' to be a non-empty string");
 
       expect(cb).toThrowError(err);
     });
