@@ -146,13 +146,15 @@ function addIntern() {
 
 // generates HTML string and writes to /dist/index.html
 function generateHTML() {
-  //stub
-  console.log("Generate HTML!!!");
-  console.log(employeesArr);
+  let html = template(employeesArr);
+  fs.writeFile("./dist/index.html", html, (err) => {
+    err ? console.error(err) : console.log("Successfully saved!");
+  });
 }
 
 // starts the app by asking for manager info
 function init() {
+  console.log("\x1b[33mEnter information to build your team: \x1b[0m");
   addManager();
 }
 
