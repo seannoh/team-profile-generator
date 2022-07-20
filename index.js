@@ -148,6 +148,7 @@ function addIntern() {
 function generateHTML() {
   //stub
   console.log("Generate HTML!!!");
+  console.log(employeesArr);
 }
 
 // starts the app by asking for manager info
