@@ -28,7 +28,7 @@ function engineerHTML(engineerData) {
           <ul class="list-group my-3">
             <li class="list-group-item">ID: ${engineerData.id}</li>
             <li class="list-group-item">Email: <a href="mailto:${engineerData.email}">${engineerData.email}</a></li>
-            <li class="list-group-item">Github: <a href="https://github.com/${engineerData.github}">${engineerData.github}</a></li>
+            <li class="list-group-item">Github: <a target="_blank" href="https://github.com/${engineerData.github}">${engineerData.github}</a></li>
           </ul>
         </div>
       </div>`;
@@ -56,7 +56,6 @@ function internHTML(internData) {
 function employeesHTML(employeesArr) {
   let employeeCards = "";
   for(let i of employeesArr) {
-    console.log(i.getRole());
     switch(i.getRole()) {
       case "Manager":
         employeeCards += managerHTML(i);
